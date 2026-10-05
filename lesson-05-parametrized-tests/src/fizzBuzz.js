@@ -1,4 +1,15 @@
-// Задание 2 к Лекции 5. Спецификация — в README.md этой папки.
+/**
+ * @param {number} n
+ */
+
 export function fizzBuzz(n) {
-  throw new Error("Реализуйте функцию fizzBuzz (см. README.md)");
+	const isFactorOf = (x) => n % x === 0
+
+	if (isFactorOf(5) && isFactorOf(3))
+		return 'FizzBuzz'
+	else if (isFactorOf(5))
+		return 'Buzz'
+	else if (isFactorOf(3))
+		return 'Fizz'
+	else return `${n}`
 }

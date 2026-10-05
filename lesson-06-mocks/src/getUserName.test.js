@@ -1,7 +1,20 @@
 import { getUserName } from "./getUserName.js";
 
-// Задание 2: задайте ответ зависимости через mockReturnValue и проверьте,
-// что функция правильно им пользуется. Проверьте и случай «не найден».
+test("getUserName: возвращает имя найденного пользователя (mockReturnValue)", () => {
+  const storage = { findById: jest.fn().mockReturnValue({ id: 42, name: "Аня" }) }
 
-test.todo("getUserName: возвращает имя найденного пользователя (mockReturnValue)");
-test.todo("getUserName: не найден → «Аноним»");
+  const res = getUserName(storage, 42)
+
+  expect(res).toBe('Аня')
+  expect(storage.findById).toHaveBeenCalledTimes(1)
+  expect(storage.findById).toHaveBeenCalledWith(42)
+});
+
+test("getUserName: не найден → «Аноним»", () => {
+  const storage = { findById: jest.fn().mockReturnValue(undefined) }
+
+  const res = getUserName(storage, 42)
+
+  expect(res).toBe('Аноним')
+  expect(storage.findById).toHaveBeenCalledTimes(1)
+})

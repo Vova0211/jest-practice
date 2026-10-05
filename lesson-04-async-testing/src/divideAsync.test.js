@@ -1,7 +1,13 @@
 import { divideAsync } from "./divideAsync.js";
 
-// Задание 1: протестируйте асинхронную функцию через async/await и resolves/rejects.
-// Не забудьте await перед expect(...).resolves / .rejects!
+test("divideAsync: делит два числа (resolves / await)", async () => {
+    const res = await divideAsync(10, 2)
 
-test.todo("divideAsync: делит два числа (resolves / await)");
-test.todo("divideAsync: деление на ноль → промис отклоняется (rejects)");
+    expect(res).toBe(5)
+})
+
+test("divideAsync: деление на ноль → промис отклоняется (rejects)", async () => {
+    const res = () => divideAsync(10, 0)
+
+    await expect(res).rejects.toThrow('Деление на ноль')
+});
